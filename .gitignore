@@ -4,6 +4,10 @@
 *.o
 *.obj
 
+# Project files
+*.vcxproj
+*.sln
+
 # Precompiled Headers
 *.gch
 *.pch
