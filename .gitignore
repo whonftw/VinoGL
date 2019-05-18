@@ -7,6 +7,7 @@
 # Project files
 *.vcxproj
 *.sln
+*.user
 
 # Precompiled Headers
 *.gch
@@ -30,3 +31,8 @@
 *.exe
 *.out
 *.app
+
+# Folders
+/bin/
+/bin-int/
+/.vs/

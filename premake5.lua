@@ -11,7 +11,7 @@ workspace "VinoGL"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "VinoGL"
-	location "Projects/VinoGL"
+	location "VinoGL"
 	kind "SharedLib"
 	language "C++"
 
@@ -20,13 +20,13 @@ project "VinoGL"
 
 	files
 	{
-		"Projects/%{prj.name}/src/**.h",
-		"Projects/%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
 	}
 
 	includedirs
 	{
-		"Projects/${prj.name}/vendor/spdlog/include"
+		"${prj.name}/vendor/spdlog/include"
 	}
 
 	filter "system:windows"
@@ -58,7 +58,7 @@ project "VinoGL"
 		optimize "On"
 
 project "Sandbox"
-	location "Projects/Sandbox"
+	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 
@@ -67,14 +67,13 @@ project "Sandbox"
 
 	files
 	{
-		"Projects/%{prj.name}/src/**.h",
-		"Projects/%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
 	}
 
 	includedirs
 	{
-		"Projects/VinoGL/vendor/spdlog/include",
-		"Projects/VinoGL/src"
+		"VinoGL/src"
 	}
 
 	links
