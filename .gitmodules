@@ -1,0 +1,3 @@
+[submodule "VinoGL/vendor/spdlog"]
+	path = VinoGL/vendor/spdlog
+	url = https://github.com/gabime/spdlog

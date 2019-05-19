@@ -26,7 +26,7 @@ project "VinoGL"
 
 	includedirs
 	{
-		"${prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include"
 	}
 
 	filter "system:windows"
@@ -73,7 +73,8 @@ project "Sandbox"
 
 	includedirs
 	{
-		"VinoGL/src"
+		"VinoGL/src",
+		"VinoGL/vendor/spdlog/include"
 	}
 
 	links
