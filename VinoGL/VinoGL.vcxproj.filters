@@ -19,6 +19,7 @@
     <ClInclude Include="src\VinoGL\Logger.h">
       <Filter>VinoGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\VinoGL\Events\EventAggregator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\VinoGL\Application.cpp">
