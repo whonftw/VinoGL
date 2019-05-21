@@ -26,7 +26,8 @@ project "VinoGL"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/src"
 	}
 
 	filter "system:windows"
@@ -83,6 +84,8 @@ project "Sandbox"
 		"VinoGL"
 	}
 
+	defines "VN_ENTRY_POINT"
+
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
@@ -112,8 +115,6 @@ project "Tests"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-	defines "VN_OMIT_MAIN"
 
 	files
 	{
