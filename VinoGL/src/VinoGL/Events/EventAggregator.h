@@ -17,12 +17,6 @@ namespace Vino
 		{
 			s_Callbacks.push_back(callback);
 		}
-
-		static void Unsubscribe(std::function<void(T)>& callback)
-		{
-			std::remove(s_Callbacks.begin(), s_Callbacks.end(), callback);
-		}
-
 		static void ClearSubscriptions()
 		{
 			s_Callbacks.clear();
