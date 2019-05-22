@@ -62,7 +62,7 @@ project "VinoGL"
 		}
 
 	filter "configurations:Debug"
-		defines "VN_DEBUG"
+		defines { "VN_DEBUG", "VN_ENABLE_ASSERTS" }
 		symbols "On"
 
 	filter "configurations:Release"

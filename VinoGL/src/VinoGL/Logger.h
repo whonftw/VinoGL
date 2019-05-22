@@ -22,11 +22,19 @@ namespace Vino
 #define VN_CORE_INFO(...) ::Vino::Logger::GetCoreLogger()->info(__VA_ARGS__);
 #define VN_CORE_WARN(...) ::Vino::Logger::GetCoreLogger()->warn(__VA_ARGS__);
 #define VN_CORE_TRACE(...) ::Vino::Logger::GetCoreLogger()->trace(__VA_ARGS__);
-#define VN_CORE_FATAL(...) ::Vino::Logger::GetCoreLogger()->fatal(__VA_ARGS__);
+#define VN_CORE_CRITICAL(...) ::Vino::Logger::GetCoreLogger()->critical(__VA_ARGS__);
+#ifdef VN_ENABLE_ASSERTS
+#define VN_CORE_ASSERT(x, ...) { if(!x) { VN_CORE_CRITICAL("Assertion failed: {0}", __VA_ARGS__); __debugbreak();} }
+#define VN_CLIENT_ASSERT(x, ...) { if(!x) { VN_CLIENT_CRITICAL("Assertion failed: {0}", __VA_ARGS__); __debugbreak();} }
+#else
+#define VN_CORE_ASSERT(x, ...)
+#define VN_CLIENT_ASSERT(x, ...)
+#endif
 
 //Client log macros
 #define VN_CLIENT_ERROR(...) ::Vino::Logger::GetClientLogger()->error(__VA_ARGS__);
 #define VN_CLIENT_INFO(...) ::Vino::Logger::GetClientLogger()->info(__VA_ARGS__);
 #define VN_CLIENT_WARN(...) ::Vino::Logger::GetClientLogger()->warn(__VA_ARGS__);
 #define VN_CLIENT_TRACE(...) ::Vino::Logger::GetClientLogger()->trace(__VA_ARGS__);
-#define VN_CLIENT_FATAL(...) ::Vino::Logger::GetClientLogger()->fatal(__VA_ARGS__);
+#define VN_CLIENT_CRITICAL(...) ::Vino::Logger::GetClientLogger()->critical(__VA_ARGS__);
+

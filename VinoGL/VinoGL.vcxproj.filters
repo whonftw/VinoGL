@@ -4,6 +4,15 @@
     <Filter Include="VinoGL">
       <UniqueIdentifier>{14EB24D8-008D-4FAE-E947-6302D588D6FE}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VinoGL\Events">
+      <UniqueIdentifier>{78D8A876-E498-24AD-ADD3-6D2A19536989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VinoGL\Platform">
+      <UniqueIdentifier>{E8DD5EE0-5469-CCA4-5D7A-4F99C98428A5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VinoGL\Platform\Windows">
+      <UniqueIdentifier>{22F0BFE2-8E27-087A-9731-6C9D03E82E73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\VinoGL.h" />
@@ -16,10 +25,18 @@
     <ClInclude Include="src\VinoGL\EntryPoint.h">
       <Filter>VinoGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\VinoGL\Events\EventAggregator.h">
+      <Filter>VinoGL\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\VinoGL\Logger.h">
       <Filter>VinoGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\VinoGL\Events\EventAggregator.h" />
+    <ClInclude Include="src\VinoGL\Platform\Windows\WindowsWindow.h">
+      <Filter>VinoGL\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VinoGL\Window.h">
+      <Filter>VinoGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\VinoGL\Application.cpp">
@@ -27,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="src\VinoGL\Logger.cpp">
       <Filter>VinoGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VinoGL\Platform\Windows\WindowsWindow.cpp">
+      <Filter>VinoGL\Platform\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
