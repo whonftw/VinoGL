@@ -10,6 +10,13 @@ workspace "VinoGL"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "VinoGL/vendor/GLFW/include"
+IncludeDir["VinoGL"] = "VinoGL/src"
+IncludeDir["spdlog"] = "VinoGL/vendor/spdlog/include"
+-- Include premake file to create GLFW project
+include "VinoGL/vendor/GLFW"
+
 project "VinoGL"
 	location "VinoGL"
 	kind "SharedLib"
@@ -26,8 +33,15 @@ project "VinoGL"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include",
-		"%{prj.name}/src"
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.VinoGL}",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -75,8 +89,8 @@ project "Sandbox"
 
 	includedirs
 	{
-		"VinoGL/src",
-		"VinoGL/vendor/spdlog/include"
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.VinoGL}"
 	}
 
 	links
@@ -125,8 +139,8 @@ project "Tests"
 	includedirs 
 	{
 		"%{prj.name}/vendor/catch/include",
-		"VinoGL/src",
-		"VinoGL/vendor/spdlog/include"
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.VinoGL}"
 	}
 
 	links

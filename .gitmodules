@@ -1,3 +1,6 @@
 [submodule "VinoGL/vendor/spdlog"]
 	path = VinoGL/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "VinoGL/vendor/GLFW"]
+	path = VinoGL/vendor/GLFW
+	url = https://github.com/whonftw/glfw
