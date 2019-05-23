@@ -37,6 +37,7 @@
     <ClInclude Include="src\VinoGL\Window.h">
       <Filter>VinoGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\vnpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\VinoGL\Application.cpp">
@@ -48,5 +49,6 @@
     <ClCompile Include="src\VinoGL\Platform\Windows\WindowsWindow.cpp">
       <Filter>VinoGL\Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\vnpch.cpp" />
   </ItemGroup>
 </Project>

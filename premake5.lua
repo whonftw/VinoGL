@@ -25,6 +25,9 @@ project "VinoGL"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "vnpch.h"
+	pchsource "VinoGL/src/vnpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",

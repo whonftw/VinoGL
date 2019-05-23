@@ -1,5 +1,6 @@
+#include "vnpch.h"
 #include "WindowsWindow.h"
-#include "VinoGL/Logger.h"
+
 namespace Vino
 {
 	//static initialization
