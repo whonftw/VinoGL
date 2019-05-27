@@ -1,6 +1,7 @@
 #include "vnpch.h"
 #include "WindowsWindow.h"
-
+#include "VinoGL/Events/EventAggregator.h"
+#include "VinoGL/Events/Window/WindowEvents.h"
 namespace Vino
 {
 	//static initialization
@@ -67,6 +68,19 @@ namespace Vino
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title, nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
+
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+		{
+			WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
+			data.Width = width;
+			data.Height = height;
+			EventAggregator<WindowSizeChanged>::Publish({ width, height });
+		});
+
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
+		{
+			EventAggregator<WindowClosed>::Publish({});
+		});
 	}
 	
 	void WindowsWindow::OnUpdate()
