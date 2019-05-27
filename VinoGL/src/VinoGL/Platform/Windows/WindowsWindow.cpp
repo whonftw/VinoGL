@@ -74,7 +74,6 @@ namespace Vino
 			WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
 			data.Width = width;
 			data.Height = height;
-			EventAggregator<WindowSizeChanged>::Publish({ width, height });
 		});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)

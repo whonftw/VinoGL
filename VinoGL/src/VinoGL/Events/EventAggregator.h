@@ -5,10 +5,23 @@
 #include <algorithm>
 namespace Vino
 {
+	struct PublicEvent
+	{
+		bool Handled;
+	};
+
+	template<typename Derived, typename = typename std::enable_if<std::is_base_of<PublicEvent, Derived>::value>::type>
+	class EventAggregator;
+	
 	template<typename T>
-	class EventAggregator
+	class EventAggregator<T>
 	{
 	public:
+		EventAggregator()
+		{
+			static_assert(std::is_base_of<PublicEvent, T>::value, "Class template argument not a subclass of PublicEvent");
+		}
+
 		static void Subscribe(std::function<void(T)>&& callback)
 		{
 			s_Callbacks.push_back(std::move(callback));

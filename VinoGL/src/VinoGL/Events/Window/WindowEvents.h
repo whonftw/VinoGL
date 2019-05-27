@@ -1,11 +1,12 @@
 #pragma once
-
-struct WindowSizeChanged
+#include "VinoGL/Events/EventAggregator.h"
+struct WindowSizeChanged: Vino::PublicEvent
 {
 	int Width;
 	int Height;
 };
 
-struct WindowClosed
+struct WindowClosed: Vino::PublicEvent
 {
+
 };
