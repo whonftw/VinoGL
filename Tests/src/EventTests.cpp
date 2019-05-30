@@ -1,54 +1,57 @@
 #include "catch.hpp"
 #include "VinoGL.h"
 
+struct SimpleValue: Vino::PublicEvent {
+	const char* value;
+	SimpleValue(const char* val): value(val)
+	{
+			
+	}
+};
+
 class StaticTest {
 public:
-	static void Test(int x)
+	static void Test(SimpleValue x)
 	{
-		VN_CLIENT_TRACE(x);
+		VN_CLIENT_TRACE("{0}", x.value);
 	}
 };
 
 class MemberTest {
+	int xInt;
 public:
-	void Test(int x)
+	MemberTest(int x): xInt(x) { }
+	void Test(SimpleValue x)
 	{
-		VN_CLIENT_TRACE(x);
+		VN_CLIENT_TRACE("{0}:{1}", xInt, x.value);
 	}
 };
-
 TEST_CASE("Event subscribe with lambda")
 {
 	Vino::Logger::Init();
-	struct SimpleValue {
-		const char* value;
-	};
-	Vino::Logger::Init();
-	Vino::EventAggregator<SimpleValue>::Subscribe([](const SimpleValue& val) {
-		VN_CLIENT_TRACE(val.value);
-	});
-	Vino::EventAggregator<SimpleValue>::Subscribe([](const SimpleValue& val) {
-		VN_CLIENT_TRACE(val.value);
-	});
-	REQUIRE(Vino::EventAggregator<SimpleValue>::Publish({ "Lambda" }));
+
+	auto subscriptionToken = Vino::EventAggregator<SimpleValue>::Subscribe([](const SimpleValue& val) {
+			VN_CLIENT_TRACE("{0}", val.value);
+		})
+	;
+	REQUIRE(Vino::EventAggregator<SimpleValue>::Publish({ "Hello from lambda" }));
 }
 
-TEST_CASE("Event subscribe with static class member")
+TEST_CASE("Event check if previous subscription has been removed")
 {
-	Vino::EventAggregator<int>::Subscribe(&StaticTest::Test);
-	REQUIRE(Vino::EventAggregator<int>::Publish(1));
+	REQUIRE(!Vino::EventAggregator<SimpleValue>::Publish({ "asdf" }));
 }
 
-TEST_CASE("Event clear test")
+TEST_CASE("Event with static method")
 {
-	Vino::EventAggregator<int>::ClearSubscriptions();
-	REQUIRE(!Vino::EventAggregator<int>::Publish(0));
+	auto subscriptionToken = Vino::EventAggregator<SimpleValue>::Subscribe(&StaticTest::Test);
+	REQUIRE(Vino::EventAggregator<SimpleValue>::Publish({ "Hello from class static method" }));
 }
 
-TEST_CASE("Event subscribe with class member")
+TEST_CASE("Event with member function of object")
 {
-	MemberTest mb;
-	Vino::EventAggregator<int>::Subscribe(std::bind(&MemberTest::Test, &mb, std::placeholders::_1));
-	Vino::EventAggregator<int>::Publish(2);
+	MemberTest test(1);
+	auto subscriptionToken = Vino::EventAggregator<SimpleValue>::Subscribe(std::bind(&MemberTest::Test, &test, std::placeholders::_1));
+	REQUIRE(Vino::EventAggregator<SimpleValue>::Publish("Hello from member function of object"));
 }
 

@@ -3,11 +3,13 @@
 #include <functional>
 #include <vector>
 #include <algorithm>
+
 namespace Vino
 {
 	struct PublicEvent
 	{
-		bool Handled;
+		PublicEvent() {}
+		virtual ~PublicEvent(){}
 	};
 
 	template<typename Derived, typename = typename std::enable_if<std::is_base_of<PublicEvent, Derived>::value>::type>
@@ -16,32 +18,37 @@ namespace Vino
 	template<typename T>
 	class EventAggregator<T>
 	{
+		EventAggregator() = delete;
 	public:
-		EventAggregator()
+		struct SubscriptionToken
 		{
-			static_assert(std::is_base_of<PublicEvent, T>::value, "Class template argument not a subclass of PublicEvent");
-		}
+		private:
+			unsigned int id;
+		public:
+			SubscriptionToken(unsigned int id)
+			{
+				SubscriptionToken::id = id;
+			}
+			~SubscriptionToken()
+			{
+				s_RegisteredCallbacks.erase(SubscriptionToken::id);
+			}
+			friend class EventAggregator<T>;
+		};
 
-		static void Subscribe(std::function<void(T)>&& callback)
+		static std::unique_ptr<SubscriptionToken> Subscribe(std::function<void(T)>&& callback)
 		{
-			s_Callbacks.push_back(std::move(callback));
-		}
-		static void Subscribe(std::function<void(T)>& callback)
-		{
-			s_Callbacks.push_back(callback);
-		}
-		static void ClearSubscriptions()
-		{
-			s_Callbacks.clear();
+			s_RegisteredCallbacks[s_CallbacksCounter] = std::move(callback);
+			return std::unique_ptr<SubscriptionToken>(new SubscriptionToken(s_CallbacksCounter++));
 		}
 
 		static bool Publish(const T& args)
 		{
-			if (s_Callbacks.size())
+			if (s_RegisteredCallbacks.size())
 			{
-				for (auto& cb : s_Callbacks)
+				for (auto& cb : s_RegisteredCallbacks)
 				{
-					cb(args);
+					cb.second(args);
 				}
 				return true;
 			}
@@ -49,8 +56,12 @@ namespace Vino
 		}
 
 	private:
-		static std::vector < std::function<void(T)>> s_Callbacks;
+		static unsigned int s_CallbacksCounter;
+		static std::unordered_map<unsigned int, std::function<void(T)>> s_RegisteredCallbacks;
 	};
+
 	template<typename T>
-	std::vector<std::function<void(T)>> EventAggregator<T>::s_Callbacks;
+	std::unordered_map<unsigned int, std::function<void(T)>> EventAggregator<T>::s_RegisteredCallbacks;
+	template<typename T>
+	unsigned int EventAggregator<T>::s_CallbacksCounter;
 }
