@@ -33,16 +33,15 @@ namespace Vino
 			{
 				s_RegisteredCallbacks.erase(SubscriptionToken::id);
 			}
-			friend class EventAggregator<T>;
 		};
 
-		static std::unique_ptr<SubscriptionToken> Subscribe(std::function<void(T)>&& callback)
+		[[nodiscard]] static std::unique_ptr<SubscriptionToken> Subscribe(std::function<void(T)>&& callback) noexcept
 		{
 			s_RegisteredCallbacks[s_CallbacksCounter] = std::move(callback);
 			return std::unique_ptr<SubscriptionToken>(new SubscriptionToken(s_CallbacksCounter++));
 		}
 
-		static bool Publish(const T& args)
+		static bool Publish(const T& args) noexcept
 		{
 			if (s_RegisteredCallbacks.size())
 			{
