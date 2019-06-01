@@ -34,12 +34,38 @@ TEST_CASE("Proper order on iteration")
 	REQUIRE((*it)->Name == "l1");
 }
 
-TEST_CASE("Lifetime test")
+TEST_CASE("Lifetime test expect strong reference")
 {
 	Vino::LayerManager lm;
 	{
 		auto lsp1 = std::shared_ptr<Vino::Layer>(new Vino::Layer{ "l1" });
 		lm.AddLayer(lsp1);
+		REQUIRE(lm.size() == 1);
 	}
 	REQUIRE(lm.size() != 0);
+}
+
+TEST_CASE("Lifetime test expect proper removal of reference")
+{
+	class LifetimeTest
+	{
+		std::shared_ptr<Vino::Layer> m_Layer;
+		Vino::LayerManager& m_Lm;
+	public:
+		LifetimeTest(Vino::LayerManager& lm) : m_Layer(nullptr), m_Lm(lm)
+		{
+			m_Layer = std::shared_ptr<Vino::Layer>(new Vino::Layer{ "l1" });
+			m_Lm.AddLayer(m_Layer);
+		}
+		~LifetimeTest()
+		{
+			m_Lm.RemoveLayer(m_Layer);
+		}
+	};
+	Vino::LayerManager lm;
+	{
+		LifetimeTest lt(lm);
+		REQUIRE(lm.size() == 1);
+	}
+	REQUIRE(lm.size() == 0);
 }
