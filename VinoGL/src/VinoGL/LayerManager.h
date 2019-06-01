@@ -20,10 +20,11 @@ namespace Vino
 		void RemoveLayer(const std::shared_ptr<Layer>&);
 		void AddOverlay(std::shared_ptr<Layer>);
 		void RemoveOverlay(const std::shared_ptr<Layer>&);
-		inline std::list<std::shared_ptr<Layer>>::iterator begin() noexcept{ return m_Layers.begin(); }
-		inline std::list<std::shared_ptr<Layer>>::iterator end() noexcept { return m_Layers.end(); }
+		inline auto begin() noexcept{ return m_Layers.rbegin(); }
+		inline auto end() noexcept { return m_Layers.rend(); }
 		inline size_t size() const noexcept { return m_Layers.size(); }
 	private:
 		std::list<std::shared_ptr<Layer>> m_Layers;
+		unsigned int m_InsertPosition = 0;
 	};
 }

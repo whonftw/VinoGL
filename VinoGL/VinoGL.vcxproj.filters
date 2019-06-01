@@ -38,7 +38,6 @@
       <Filter>VinoGL</Filter>
     </ClInclude>
     <ClInclude Include="src\vnpch.h" />
-    <ClInclude Include="src\VinoGL\Events\Window\WindowEvents.h" />
     <ClInclude Include="src\VinoGL\LayerManager.h" />
   </ItemGroup>
   <ItemGroup>
