@@ -14,8 +14,10 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "VinoGL/vendor/GLFW/include"
 IncludeDir["VinoGL"] = "VinoGL/src"
 IncludeDir["spdlog"] = "VinoGL/vendor/spdlog/include"
+IncludeDir["Glad"] = "VinoGL/vendor/Glad/include"
 -- Include premake file to create GLFW project
 include "VinoGL/vendor/GLFW"
+include "VinoGL/vendor/Glad"
 
 project "VinoGL"
 	location "VinoGL"
@@ -38,12 +40,14 @@ project "VinoGL"
 	{
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.VinoGL}",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -55,7 +59,8 @@ project "VinoGL"
 		defines
 		{
 			"VN_PLATFORM_WINDOWS",
-			"VN_BUILD_DLL"
+			"VN_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands

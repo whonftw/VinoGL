@@ -34,6 +34,9 @@
     <ClInclude Include="src\VinoGL\Events\Window\WindowEvents.h">
       <Filter>VinoGL\Events\Window</Filter>
     </ClInclude>
+    <ClInclude Include="src\VinoGL\Layer.h">
+      <Filter>VinoGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\VinoGL\LayerManager.h">
       <Filter>VinoGL</Filter>
     </ClInclude>
@@ -47,10 +50,12 @@
       <Filter>VinoGL</Filter>
     </ClInclude>
     <ClInclude Include="src\vnpch.h" />
-    <ClInclude Include="src\VinoGL\Layer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\VinoGL\Application.cpp">
+      <Filter>VinoGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VinoGL\Layer.cpp">
       <Filter>VinoGL</Filter>
     </ClCompile>
     <ClCompile Include="src\VinoGL\LayerManager.cpp">
@@ -63,6 +68,5 @@
       <Filter>VinoGL\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\vnpch.cpp" />
-    <ClCompile Include="src\VinoGL\Layer.cpp" />
   </ItemGroup>
 </Project>

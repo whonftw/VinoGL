@@ -38,3 +38,6 @@
 /.vs/
 */bin/
 */obj/
+
+VinoGL/vendor/Glad/bin-int/*
+VinoGL/vendor/Glad/bin/*
