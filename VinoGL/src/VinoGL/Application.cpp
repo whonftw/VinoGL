@@ -17,7 +17,21 @@ void Vino::Application::Run()
 	while (m_IsOpen) 
 	{
 		m_Window->OnUpdate();
+		for (const auto& layer : m_LayerManager)
+		{
+			layer->OnUpdate();
+		}
 	}
+}
+
+void Vino::Application::PushLayer(std::shared_ptr<Layer>& layer)
+{
+	m_LayerManager.AddLayer(layer);
+}
+
+void Vino::Application::PushOverlay(std::shared_ptr<Layer>& layer)
+{
+	m_LayerManager.AddOverlay(layer);
 }
 
 Vino::Application::~Application()

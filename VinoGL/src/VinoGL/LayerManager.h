@@ -1,16 +1,9 @@
 #pragma once
 #include "vnpch.h"
-#include "VinoGL.h"
-
+#include "Core.h"
+#include "Layer.h"
 namespace Vino
 {
-	struct VINO_API Layer {
-		const char* Name;
-		Layer(const char* name)
-		{
-			Name = name;
-		}
-	};
 	class VINO_API LayerManager
 	{
 	public:

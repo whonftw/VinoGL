@@ -25,13 +25,13 @@ TEST_CASE("Proper order on iteration")
 	lm.AddLayer(lsp2);
 	lm.AddOverlay(olsp2);
 	auto it = lm.begin();
-	REQUIRE((*it)->Name == "ol2");
+	REQUIRE((*it)->GetName() == "ol2");
 	it++;
-	REQUIRE((*it)->Name == "ol1");
+	REQUIRE((*it)->GetName() == "ol1");
 	it++;
-	REQUIRE((*it)->Name == "l2");
+	REQUIRE((*it)->GetName() == "l2");
 	it++;
-	REQUIRE((*it)->Name == "l1");
+	REQUIRE((*it)->GetName() == "l1");
 }
 
 TEST_CASE("Lifetime test expect strong reference")
