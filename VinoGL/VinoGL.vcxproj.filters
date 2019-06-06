@@ -38,7 +38,11 @@
       <Filter>VinoGL</Filter>
     </ClInclude>
     <ClInclude Include="src\vnpch.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="src\VinoGL\LayerManager.h" />
+=======
+    <ClInclude Include="src\VinoGL\Layer.h" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\VinoGL\Application.cpp">
@@ -51,9 +55,13 @@
       <Filter>VinoGL\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\vnpch.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="src\VinoGL\LayerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+=======
+    <ClCompile Include="src\VinoGL\Layer.cpp" />
+>>>>>>> Stashed changes
   </ItemGroup>
 </Project>
