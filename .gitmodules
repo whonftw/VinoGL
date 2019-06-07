@@ -4,3 +4,6 @@
 [submodule "VinoGL/vendor/GLFW"]
 	path = VinoGL/vendor/GLFW
 	url = https://github.com/whonftw/glfw
+[submodule "VinoGL/vendor/imgui"]
+	path = VinoGL/vendor/imgui
+	url = https://github.com/whonftw/imgui
