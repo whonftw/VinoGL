@@ -3,6 +3,8 @@
 #include "VinoGL/Events/EventAggregator.h"
 #include "VinoGL/Events/Window/WindowEvents.h"
 #include <glad/glad.h>
+#include "VinoGL/Events/EventAggregator.h"
+
 namespace Vino
 {
 	//static initialization
@@ -78,6 +80,7 @@ namespace Vino
 			WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
 			data.Width = width;
 			data.Height = height;
+			Vino::EventAggregator<Vino::WindowSizeChanged>::Publish({ width, height });
 		});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)

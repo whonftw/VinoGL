@@ -52,7 +52,7 @@
     <ClInclude Include="src\VinoGL\Logger.h">
       <Filter>VinoGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\VinoGL\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+    <ClInclude Include="src\VinoGL\Platform\OpenGL\ImGuiRenderer.h">
       <Filter>VinoGL\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\VinoGL\Platform\Windows\WindowsWindow.h">
@@ -79,7 +79,7 @@
     <ClCompile Include="src\VinoGL\Logger.cpp">
       <Filter>VinoGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\VinoGL\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+    <ClCompile Include="src\VinoGL\Platform\OpenGL\ImGuiRenderer.cpp">
       <Filter>VinoGL\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\VinoGL\Platform\Windows\WindowsWindow.cpp">

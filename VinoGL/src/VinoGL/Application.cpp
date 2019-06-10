@@ -27,11 +27,13 @@ void Vino::Application::Run()
 void Vino::Application::PushLayer(std::shared_ptr<Layer>& layer)
 {
 	m_LayerManager.AddLayer(layer);
+	layer->OnAttach();
 }
 
 void Vino::Application::PushOverlay(std::shared_ptr<Layer>& layer)
 {
 	m_LayerManager.AddOverlay(layer);
+	layer->OnAttach();
 }
 
 Vino::Application::~Application()
