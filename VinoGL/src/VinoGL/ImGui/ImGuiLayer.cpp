@@ -2,10 +2,14 @@
 #include "ImGuiLayer.h"
 #include "VinoGL/Platform/OpenGL/ImGuiRenderer.h"
 #include "GLFW/glfw3.h"
-#include "VinoGL/Events/EventAggregator.h"
-#include "VinoGL/Events/Window/WindowEvents.h"
 Vino::ImGuiLayer::ImGuiLayer(): Layer("ImGuiLayer")
 {
+	m_SizeChangeToken = Vino::EventAggregator<Vino::WindowSizeChangedEvent>::Subscribe([](const Vino::WindowSizeChangedEvent& ev)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.DisplaySize = ImVec2(ev.Width, ev.Height);
+		io.DisplayFramebufferScale = ImVec2(1.f, 1.f);
+	});
 }
 
 Vino::ImGuiLayer::~ImGuiLayer()
@@ -44,7 +48,7 @@ void Vino::ImGuiLayer::OnAttach()
 	io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
 	io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
 
-	Vino::EventAggregator<Vino::WindowSizeChanged>::Subscribe([](const Vino::WindowSizeChanged& windowSize)
+	Vino::EventAggregator<Vino::WindowSizeChangedEvent>::Subscribe([](const Vino::WindowSizeChangedEvent& windowSize)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.DisplaySize = ImVec2(windowSize.Width, windowSize.Height);
@@ -54,8 +58,6 @@ void Vino::ImGuiLayer::OnAttach()
 void Vino::ImGuiLayer::OnDetach()
 {
 	ImGui::DestroyContext();
-
-
 }
 
 void Vino::ImGuiLayer::OnUpdate()
@@ -72,4 +74,55 @@ void Vino::ImGuiLayer::OnUpdate()
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void Vino::ImGuiLayer::OnMouseButtonPressed(Vino::MouseButtonPressedEvent& ev)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.MouseDown[ev.Button] = true;
+}
+
+void Vino::ImGuiLayer::OnMouseButtonReleased(Vino::MouseButtonReleasedEvent& ev)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.MouseDown[ev.Button] = false;
+}
+
+void Vino::ImGuiLayer::OnMousePositionChanged(Vino::MousePositionChangedEvent& ev)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.MousePos = ImVec2(ev.xPos, ev.yPos);
+}
+
+void Vino::ImGuiLayer::OnMouseScrolled(Vino::MouseScrolledEvent& ev)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.MouseWheelH += ev.xOffset;
+	io.MouseWheel += ev.yOffset;
+}
+
+void Vino::ImGuiLayer::OnKeyPressed(Vino::KeyPressedEvent& ev)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.KeysDown[ev.Key] = true;
+
+	io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+	io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+	io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+	io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+}
+
+void Vino::ImGuiLayer::OnKeyReleased(Vino::KeyReleasedEvent& ev)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.KeysDown[ev.Key] = false;
+}
+
+void Vino::ImGuiLayer::OnKeyTyped(Vino::KeyTypedEvent& ev)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	if (ev.Key > 0 && ev.Key < 0x10000)
+	{
+		io.AddInputCharacter((unsigned short)ev.Key);
+	}
 }

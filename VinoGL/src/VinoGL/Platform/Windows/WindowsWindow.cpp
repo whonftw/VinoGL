@@ -1,9 +1,10 @@
 #include "vnpch.h"
 #include "WindowsWindow.h"
 #include "VinoGL/Events/EventAggregator.h"
-#include "VinoGL/Events/Window/WindowEvents.h"
+#include "VinoGL/Events/WindowEvents.h"
 #include <glad/glad.h>
 #include "VinoGL/Events/EventAggregator.h"
+#include "VinoGL/Events/InputEvents.h"
 
 namespace Vino
 {
@@ -32,6 +33,7 @@ namespace Vino
 	void WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
+		glfwTerminate();
 	}
 
 	inline unsigned int WindowsWindow::GetWidth() const
@@ -80,18 +82,76 @@ namespace Vino
 			WindowProperties& data = *(WindowProperties*)glfwGetWindowUserPointer(window);
 			data.Width = width;
 			data.Height = height;
-			Vino::EventAggregator<Vino::WindowSizeChanged>::Publish({ width, height });
+			glViewport(0, 0, width, height);
+			Vino::EventAggregator<Vino::WindowSizeChangedEvent>::Publish({ width, height });
+		});
+
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					Vino::EventAggregator<Vino::KeyPressedEvent>::Publish({ key, false });
+					break;
+				}
+				case GLFW_REPEAT:
+				{
+					Vino::EventAggregator<Vino::KeyPressedEvent>::Publish({ key, true });
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					Vino::EventAggregator<Vino::KeyReleasedEvent>::Publish({ key });
+					break;
+				}
+			}
+		});
+
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int key)
+		{
+			Vino::EventAggregator<Vino::KeyTypedEvent>::Publish({ key });
+		});
+
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
+		{
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					Vino::EventAggregator<Vino::MouseButtonPressedEvent>::Publish({ button });
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					Vino::EventAggregator<Vino::MouseButtonReleasedEvent>::Publish({ button });
+					break;
+				}
+			}
+		});
+
+		glfwSetScrollCallback(m_Window, [](GLFWwindow*, double xoffset, double yoffset)
+		{
+			Vino::EventAggregator<Vino::MouseScrolledEvent>::Publish({ xoffset, yoffset });
+		});
+
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow*, double xpos, double ypos)
+		{
+			Vino::EventAggregator<Vino::MousePositionChangedEvent>::Publish({ xpos, ypos });
 		});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 		{
-			EventAggregator<WindowClosed>::Publish({});
+			EventAggregator<WindowClosedEvent>::Publish({});
 		});
 	}
-	
+
 	void WindowsWindow::OnUpdate()
 	{
-		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
+		glfwPollEvents();
+
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 }
