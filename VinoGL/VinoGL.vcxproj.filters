@@ -7,9 +7,6 @@
     <Filter Include="VinoGL\Events">
       <UniqueIdentifier>{78D8A876-E498-24AD-ADD3-6D2A19536989}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VinoGL\Events\Window">
-      <UniqueIdentifier>{5FAEADA8-4B3D-3772-F45B-4B6DE0C94718}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VinoGL\ImGui">
       <UniqueIdentifier>{3E5F7E8F-2AC2-0D34-D347-46EABF89D9B6}</UniqueIdentifier>
     </Filter>
@@ -37,6 +34,12 @@
     <ClInclude Include="src\VinoGL\Events\EventAggregator.h">
       <Filter>VinoGL\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\VinoGL\Events\InputEvents.h">
+      <Filter>VinoGL\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VinoGL\Events\WindowEvents.h">
+      <Filter>VinoGL\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\VinoGL\ImGui\ImGuiLayer.h">
       <Filter>VinoGL\ImGui</Filter>
     </ClInclude>
@@ -59,10 +62,6 @@
       <Filter>VinoGL</Filter>
     </ClInclude>
     <ClInclude Include="src\vnpch.h" />
-    <ClInclude Include="src\VinoGL\Events\WindowEvents.h">
-      <Filter>VinoGL\Events\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="src\VinoGL\Events\InputEvents.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\VinoGL\Application.cpp">
