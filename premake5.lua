@@ -53,7 +53,6 @@ project "VinoGL"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -71,13 +70,16 @@ project "VinoGL"
 
 	filter "configurations:Debug"
 		defines { "VN_DEBUG", "VN_ENABLE_ASSERTS" }
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VN_RELEASE"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:DIST"
+		runtime "Release"
 		defines "VN_DIST"
 		optimize "On"
 
@@ -110,7 +112,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -120,14 +121,17 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "VN_DEBUG"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VN_RELEASE"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:DIST"
 		defines "VN_DIST"
+		runtime "Release"
 		optimize "On"
 
 project "Tests"
