@@ -15,9 +15,12 @@ IncludeDir["GLFW"] = "VinoGL/vendor/GLFW/include"
 IncludeDir["VinoGL"] = "VinoGL/src"
 IncludeDir["spdlog"] = "VinoGL/vendor/spdlog/include"
 IncludeDir["Glad"] = "VinoGL/vendor/Glad/include"
+IncludeDir["imgui"] = "VinoGL/vendor/imgui"
 -- Include premake file to create GLFW project
-include "VinoGL/vendor/GLFW"
-include "VinoGL/vendor/Glad"
+group "Dependencies"
+	include "VinoGL/vendor/GLFW"
+	include "VinoGL/vendor/Glad"
+	include "VinoGL/vendor/imgui"
 
 project "VinoGL"
 	location "VinoGL"
@@ -41,13 +44,15 @@ project "VinoGL"
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.VinoGL}",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.imgui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"imgui",
 		"opengl32.lib"
 	}
 

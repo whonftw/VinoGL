@@ -7,11 +7,14 @@
     <Filter Include="VinoGL\Events">
       <UniqueIdentifier>{78D8A876-E498-24AD-ADD3-6D2A19536989}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VinoGL\Events\Window">
-      <UniqueIdentifier>{5FAEADA8-4B3D-3772-F45B-4B6DE0C94718}</UniqueIdentifier>
+    <Filter Include="VinoGL\ImGui">
+      <UniqueIdentifier>{3E5F7E8F-2AC2-0D34-D347-46EABF89D9B6}</UniqueIdentifier>
     </Filter>
     <Filter Include="VinoGL\Platform">
       <UniqueIdentifier>{E8DD5EE0-5469-CCA4-5D7A-4F99C98428A5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VinoGL\Platform\OpenGL">
+      <UniqueIdentifier>{1CD269DD-08CC-922F-F138-2940DDD1F89B}</UniqueIdentifier>
     </Filter>
     <Filter Include="VinoGL\Platform\Windows">
       <UniqueIdentifier>{22F0BFE2-8E27-087A-9731-6C9D03E82E73}</UniqueIdentifier>
@@ -31,8 +34,14 @@
     <ClInclude Include="src\VinoGL\Events\EventAggregator.h">
       <Filter>VinoGL\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\VinoGL\Events\Window\WindowEvents.h">
-      <Filter>VinoGL\Events\Window</Filter>
+    <ClInclude Include="src\VinoGL\Events\InputEvents.h">
+      <Filter>VinoGL\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VinoGL\Events\WindowEvents.h">
+      <Filter>VinoGL\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VinoGL\ImGui\ImGuiLayer.h">
+      <Filter>VinoGL\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\VinoGL\Layer.h">
       <Filter>VinoGL</Filter>
@@ -42,6 +51,9 @@
     </ClInclude>
     <ClInclude Include="src\VinoGL\Logger.h">
       <Filter>VinoGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VinoGL\Platform\OpenGL\ImGuiRenderer.h">
+      <Filter>VinoGL\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\VinoGL\Platform\Windows\WindowsWindow.h">
       <Filter>VinoGL\Platform\Windows</Filter>
@@ -55,6 +67,9 @@
     <ClCompile Include="src\VinoGL\Application.cpp">
       <Filter>VinoGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\VinoGL\ImGui\ImGuiLayer.cpp">
+      <Filter>VinoGL\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\VinoGL\Layer.cpp">
       <Filter>VinoGL</Filter>
     </ClCompile>
@@ -63,6 +78,9 @@
     </ClCompile>
     <ClCompile Include="src\VinoGL\Logger.cpp">
       <Filter>VinoGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VinoGL\Platform\OpenGL\ImGuiRenderer.cpp">
+      <Filter>VinoGL\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\VinoGL\Platform\Windows\WindowsWindow.cpp">
       <Filter>VinoGL\Platform\Windows</Filter>
