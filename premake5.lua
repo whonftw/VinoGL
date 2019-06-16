@@ -64,8 +64,8 @@ project "VinoGL"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Tests")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\""),
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Tests/\"")
 		}
 
 	filter "configurations:Debug"
