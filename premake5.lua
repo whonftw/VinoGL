@@ -22,6 +22,8 @@ group "Dependencies"
 	include "VinoGL/vendor/Glad"
 	include "VinoGL/vendor/imgui"
 
+group ""
+
 project "VinoGL"
 	location "VinoGL"
 	kind "SharedLib"
