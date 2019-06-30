@@ -41,3 +41,5 @@
 
 VinoGL/vendor/Glad/bin-int/*
 VinoGL/vendor/Glad/bin/*
+VinoGL/vendor/imgui/bin-int/*
+VinoGL/vendor/imgui/bin/*

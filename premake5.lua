@@ -17,6 +17,7 @@ IncludeDir["VinoGL"] = "VinoGL/src"
 IncludeDir["spdlog"] = "VinoGL/vendor/spdlog/include"
 IncludeDir["Glad"] = "VinoGL/vendor/Glad/include"
 IncludeDir["imgui"] = "VinoGL/vendor/imgui"
+IncludeDir["glm"] = "VinoGL/vendor/glm"
 -- Include premake file to create GLFW project
 group "Dependencies"
 	include "VinoGL/vendor/GLFW"
@@ -49,7 +50,8 @@ project "VinoGL"
 		"%{IncludeDir.VinoGL}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.imgui}"
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -109,7 +111,8 @@ project "Sandbox"
 	includedirs
 	{
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.VinoGL}"
+		"%{IncludeDir.VinoGL}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
