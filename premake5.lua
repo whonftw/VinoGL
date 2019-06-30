@@ -29,6 +29,7 @@ project "VinoGL"
 	location "VinoGL"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "On"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -170,7 +171,6 @@ project "Tests"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
