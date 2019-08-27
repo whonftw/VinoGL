@@ -5,8 +5,6 @@ class SandboxApplication : public Vino::Application
 public:
 	SandboxApplication()
 	{
-		std::shared_ptr<Vino::Layer> layer = std::shared_ptr<Vino::ImGuiLayer>(new Vino::ImGuiLayer());
-		PushOverlay(layer);
 	}
 };
 

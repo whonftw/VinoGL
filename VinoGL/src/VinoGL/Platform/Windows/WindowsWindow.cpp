@@ -46,6 +46,11 @@ namespace Vino
 		return m_Data.Height;
 	}
 
+	void * WindowsWindow::GetNativeWindow() const
+	{
+		return static_cast<void*>(m_Window);
+	}
+
 	void WindowsWindow::SetVSync(bool enabled)
 	{
 		if (enabled)

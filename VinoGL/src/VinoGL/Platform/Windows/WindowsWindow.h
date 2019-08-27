@@ -14,6 +14,7 @@ namespace Vino
 		inline unsigned int GetWidth() const override;
 		inline unsigned int GetHeight() const override;
 
+		virtual void* GetNativeWindow() const override;
 		void SetVSync(bool enabled) override;
 		bool IsVSyncEnabled() const override;
 	protected:

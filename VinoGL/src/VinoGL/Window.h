@@ -21,7 +21,7 @@ namespace Vino
 
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;
-
+		virtual void* GetNativeWindow() const = 0;
 		// To be implemented per platform
 		static Window* Create(const WindowProperties& properties = WindowProperties());
 	};

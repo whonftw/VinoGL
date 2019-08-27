@@ -10,16 +10,11 @@ namespace Vino {
 	public:
 		ImGuiLayer();
 		virtual ~ImGuiLayer();
-		void OnAttach();
-		void OnDetach();
-		void OnUpdate();
-		void OnMouseButtonPressed(Vino::MouseButtonPressedEvent&);
-		void OnMouseButtonReleased(Vino::MouseButtonReleasedEvent&);
-		void OnMousePositionChanged(Vino::MousePositionChangedEvent&);
-		void OnMouseScrolled(Vino::MouseScrolledEvent&);
-		void OnKeyPressed(Vino::KeyPressedEvent&);
-		void OnKeyReleased(Vino::KeyReleasedEvent&);
-		void OnKeyTyped(Vino::KeyTypedEvent&);
+		virtual void OnAttach() override;
+		virtual void OnDetach() override;
+		virtual void OnRender() override;
+		void Begin();
+		void End();
 	private:
 		float m_Time = 0.f;
 		std::unique_ptr<Vino::EventAggregator<Vino::WindowSizeChangedEvent>::SubscriptionToken> m_SizeChangeToken;
