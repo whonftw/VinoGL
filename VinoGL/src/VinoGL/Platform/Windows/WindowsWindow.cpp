@@ -34,6 +34,7 @@ namespace Vino
 	{
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
+		s_Initialized = false;
 	}
 
 	inline unsigned int WindowsWindow::GetWidth() const

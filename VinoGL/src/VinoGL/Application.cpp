@@ -48,5 +48,5 @@ void Vino::Application::PushOverlay(std::shared_ptr<Layer>& layer)
 
 Vino::Application::~Application()
 {
-
+	s_Application.release();
 }
